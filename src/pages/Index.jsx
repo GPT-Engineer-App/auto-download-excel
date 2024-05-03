@@ -74,6 +74,31 @@ const Index = () => {
     });
   };
 
+  const [question, setQuestion] = useState("");
+  const handleQuestionChange = (event) => setQuestion(event.target.value);
+
+  const handleQuestionSubmit = () => {
+    if (!file) {
+      toast({
+        title: "No file loaded",
+        description: "Please upload a file before asking questions.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const answer = "This is a simulated answer based on the uploaded document.";
+    toast({
+      title: "Answer",
+      description: answer,
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   return (
     <Box p={5}>
       <Input type="file" onChange={handleFileChange} accept=".txt,.doc,.docx,.pdf,.xlsx" />
@@ -82,6 +107,10 @@ const Index = () => {
       </Button>
       <Button leftIcon={<FaFileDownload />} colorScheme="green" mt={3} ml={3} onClick={handlePDFDownload}>
         Export as PDF
+      </Button>
+      <Input placeholder="Ask a question about the document..." mt={3} value={question} onChange={handleQuestionChange} />
+      <Button colorScheme="purple" mt={3} onClick={handleQuestionSubmit}>
+        Submit Question
       </Button>
     </Box>
   );
