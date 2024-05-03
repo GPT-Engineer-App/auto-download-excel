@@ -76,9 +76,6 @@ const Index = () => {
 
   return (
     <Box p={5}>
-      <Text fontSize="xl" mb={4}>
-        Upload flight file to generate invoice
-      </Text>
       <Input type="file" onChange={handleFileChange} accept=".txt,.doc,.docx,.pdf" />
       <Button leftIcon={<FaFileUpload />} colorScheme="blue" mt={3} onClick={handleUpload}>
         Upload and Process <FaFileDownload />
