@@ -44,11 +44,44 @@ const Index = () => {
     });
   };
 
+  const handlePDFDownload = () => {
+    if (!file) {
+      toast({
+        title: "No file selected",
+        description: "Please select a file to upload.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const fileName = file.name.replace(/\..+$/, ".pdf");
+    const url = window.URL.createObjectURL(new Blob([file], { type: "application/pdf" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+
+    toast({
+      title: "PDF created",
+      description: `A new PDF file has been created and downloaded: ${fileName}`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   return (
     <Box p={5}>
       <Input type="file" onChange={handleFileChange} accept=".txt,.doc,.docx,.pdf" />
       <Button leftIcon={<FaFileUpload />} colorScheme="blue" mt={3} onClick={handleUpload}>
         Upload and Process <FaFileDownload />
+      </Button>
+      <Button leftIcon={<FaFileDownload />} colorScheme="green" mt={3} ml={3} onClick={handlePDFDownload}>
+        Export as PDF
       </Button>
     </Box>
   );
