@@ -76,7 +76,7 @@ const Index = () => {
 
   return (
     <Box p={5}>
-      <Input type="file" onChange={handleFileChange} accept=".txt,.doc,.docx,.pdf" />
+      <Input type="file" onChange={handleFileChange} accept=".txt,.doc,.docx,.pdf,.xlsx" />
       <Button leftIcon={<FaFileUpload />} colorScheme="blue" mt={3} onClick={handleUpload}>
         Upload and Process <FaFileDownload />
       </Button>
